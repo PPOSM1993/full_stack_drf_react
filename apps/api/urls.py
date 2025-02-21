@@ -1,10 +1,9 @@
-POSTGRESQL = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dashboard',
-        'USER': 'postgres',
-        'PASSWORD': '1234',
-        'HOST': 'localhost',
-        'PORT': '5432'
-    }
-}
+from django.urls import path
+from . import views
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register('country', views.CountryView, basename='country')
+router.register('league', views.LeagueView, basename='league')
+
+urlpatterns = router.urls
