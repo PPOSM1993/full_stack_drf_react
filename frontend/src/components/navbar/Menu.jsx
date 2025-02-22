@@ -90,7 +90,14 @@ export default function Menu() {
         <ListItemIcon>
             <AddBoxIcon />
         </ListItemIcon>
-        <ListItemText primary="Create clubs" />
+        <ListItemText primary="Create Clubs" />
+    </ListItemButton>
+
+    <ListItemButton component={Link} to="/" selected={path === "/"}>
+        <ListItemIcon>
+            <AddBoxIcon />
+        </ListItemIcon>
+        <ListItemText primary="Create New League" />
     </ListItemButton>
     
     </List>

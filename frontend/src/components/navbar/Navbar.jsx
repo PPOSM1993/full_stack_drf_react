@@ -30,7 +30,7 @@ export default function Navbar({content}) {
             <IconButton onClick={changeMenu} sx={{marginRight:'30px', color: 'white'}}>
                {isBigMenu ? <MenuOpenIcon/> : <MenuIcon/>}
             </IconButton>
-            ERP Django React
+            Mini ERP Django React
         </Toolbar>
       </AppBar>
       <Drawer

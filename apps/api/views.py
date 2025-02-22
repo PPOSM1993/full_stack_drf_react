@@ -6,7 +6,6 @@ from rest_framework.response import Response
 
 # Create your views here.
 
-
 class CountryView(viewsets.ViewSet):
     permission_classes = [permissions.AllowAny]
     queryset = Country.objects.all()
@@ -43,7 +42,6 @@ class CountryView(viewsets.ViewSet):
         country.delete()
         return Response(status=204)
 
-
 class LeagueView(viewsets.ViewSet):
     permission_classes = [permissions.AllowAny]
     queryset = League.objects.all()
@@ -79,3 +77,74 @@ class LeagueView(viewsets.ViewSet):
         league = League.objects.get(pk=pk)
         league.delete()
         return Response(status=204)
+    
+class CharacteristicView(viewsets.ViewSet):
+    permission_classes = [permissions.AllowAny]
+    queryset = Characteristic.objects.all()
+    serializer_class = CharacteristicSerializer
+    
+    def list(self, request):
+        queryset = Characteristic.objects.all()
+        serializer = CharacteristicSerializer(queryset, many=True)
+        return Response(serializer.data)
+    
+    def create(self, request):
+        serializer = CharacteristicSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+    
+    def retrieve(self, request, pk=None):
+        queryset = Characteristic.objects.all()
+        characteristic = get_object_or_404(queryset, pk=pk)
+        serializer = CharacteristicSerializer(characteristic)
+        return Response(serializer.data)
+    
+    def update(self, request, pk=None):
+        characteristic = Characteristic.objects.get(pk=pk)
+        serializer = CharacteristicSerializer(characteristic, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+    
+    def destroy(self, request, pk=None):
+        characteristic = Characteristic.objects.get(pk=pk)
+        characteristic.delete()
+        return Response(status=204)
+
+class FootballClubView(viewsets.ViewSet):
+    permission_classes = [permissions.AllowAny]
+    queryset = FootballClub.objects.all()
+    serializer_class = FootballClubSerializer
+    
+    def list(self, request):
+        queryset = FootballClub.objects.all()
+        serializer = FootballClubSerializer(queryset, many=True)
+        return Response(serializer.data)
+    
+    def create(self, request):
+        serializer = FootballClubSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+    
+    def retrieve(self, request, pk=None):
+        queryset = FootballClub.objects.all()
+        football_club = get_object_or_404(queryset, pk=pk)
+        serializer = FootballClubSerializer(football_club)
+        return Response(serializer.data)
+    
+    def update(self, request, pk=None):
+        football_club = FootballClub.objects.get(pk=pk)
+        serializer = FootballClubSerializer(football_club, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+    
+    def destroy(self, request, pk=None):
+        football_club = FootballClub.objects.get(pk=pk)
+        football_club.delete()
