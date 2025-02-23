@@ -6,7 +6,7 @@ from rest_framework.response import Response
 
 # Create your views here.
 
-class CountryView(viewsets.ViewSet):
+class CountryViewSet(viewsets.ViewSet):
     permission_classes = [permissions.AllowAny]
     queryset = Country.objects.all()
     serializer_class = CountrySerializer
@@ -42,7 +42,7 @@ class CountryView(viewsets.ViewSet):
         country.delete()
         return Response(status=204)
 
-class LeagueView(viewsets.ViewSet):
+class LeagueViewSet(viewsets.ViewSet):
     permission_classes = [permissions.AllowAny]
     queryset = League.objects.all()
     serializer_class = LeagueSerializer
@@ -78,7 +78,7 @@ class LeagueView(viewsets.ViewSet):
         league.delete()
         return Response(status=204)
     
-class CharacteristicView(viewsets.ViewSet):
+class CharacteristicViewSet(viewsets.ViewSet):
     permission_classes = [permissions.AllowAny]
     queryset = Characteristic.objects.all()
     serializer_class = CharacteristicSerializer
@@ -114,7 +114,7 @@ class CharacteristicView(viewsets.ViewSet):
         characteristic.delete()
         return Response(status=204)
 
-class FootballClubView(viewsets.ViewSet):
+class FootballClubViewSet(viewsets.ViewSet):
     permission_classes = [permissions.AllowAny]
     queryset = FootballClub.objects.all()
     serializer_class = FootballClubSerializer
@@ -129,7 +129,9 @@ class FootballClubView(viewsets.ViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.errors, status=400)
+        else:
+            return Response(serializer.errors, status=400)
+        #return Response(serializer.errors, status=400)
     
     def retrieve(self, request, pk=None):
         queryset = FootballClub.objects.all()
@@ -148,3 +150,5 @@ class FootballClubView(viewsets.ViewSet):
     def destroy(self, request, pk=None):
         football_club = FootballClub.objects.get(pk=pk)
         football_club.delete()
+        return Response(status=204)
+
